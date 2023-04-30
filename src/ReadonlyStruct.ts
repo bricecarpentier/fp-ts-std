@@ -46,7 +46,9 @@ export const merge =
  * @since 0.14.0
  */
 export const pick =
-  <A, K extends keyof A>(ks: ReadonlyArray<K>) =>
+  <A extends Record<string, unknown>, K extends keyof A>(
+    ks: ReadonlyArray<K>,
+  ) =>
   (x: A): Pick<A, K> =>
     // I don't believe there's any reasonable way to model this sort of
     // transformation in the type system without an assertion - at least here
@@ -83,7 +85,9 @@ export const pick =
  *
  * @since 0.14.0
  */
-export const pickFrom = <A>(): (<K extends keyof A>(
+export const pickFrom = <A extends Record<string, unknown>>(): (<
+  K extends keyof A,
+>(
   ks: ReadonlyArray<K>,
 ) => (x: A) => Pick<A, K>) => pick
 
